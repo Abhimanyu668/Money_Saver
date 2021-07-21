@@ -7,11 +7,11 @@ a product at least price , and its very tds task to check prices regularly & eve
 
 That's my motivation behind this project to solve this issue...
 
-My application Included GUI ,Database & Web Scraping tools.
+My application Included GUI ,Database on cloud plateform, Wayscript & Web Scraping tools.
 
 
 
-GUI - Tkinter module  ,
+GUI - Tkinter module designed in figma ,
 Database- mysql !.e hosted on Clever cloud plateform
 and script for price tracking is made using Beautifulsoup an request module 
 & for Email i used smtplib module. and I deploy this script on WayScript for secheduling the program and i sechedule this task on everyday 
