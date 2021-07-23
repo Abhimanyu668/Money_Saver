@@ -11,13 +11,18 @@ window.title("MoneySaver")
 img=PhotoImage(file='A:\\priceTracker\\images\\logo.png')
 window.iconphoto(False,img)
 
+
+
 # function for inserting data in main table
 def insert_main():
     Email1=ent_email1.get()
     password=ent_password1.get()
     #print(Email1)
+
+
+
     con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="*************",passwd="*************",
             database="bttotienkk1dqejaut6j")
     cursor=con.cursor()
     #sql="select password from registration where Email=%s";
@@ -37,15 +42,20 @@ def insert_reg():
     password=ent_password.get()
     if(name=="" or email=="" or password==""):
         messageBox.showinfo("Insert status","All fields are required:")
+        delete_reg()
+        register()
     else:
         con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="*************",passwd="*************",
             database="bttotienkk1dqejaut6j")
         cursor=con.cursor()
         cursor.execute("insert into registration(Name,Email,Password)values('"+name +"','"+email +"','"+password +"')")
         cursor.execute("commit");
-        messageBox.showinfo("Insert status", "Inserted successfully\n you can login into application:")
+        messageBox.showinfo("Insert status", "Registerd successfully\n Now you can add URL and PRICE\n into application:")
         con.close();
+        delete_login()
+        login()
+
 
 #function for jump to url page
 def product_window():
@@ -59,18 +69,26 @@ def fetch_login():
     else:
         try:
             con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="*************",passwd="*************",
             database="bttotienkk1dqejaut6j")
             cursor=con.cursor()
             cursor.execute("select * from registration where email=%s and password=%s",(ent_email1.get(),ent_password1.get()))
             row=cursor.fetchone()
             if row==None:
+                delete_login()
+              
                 messageBox.showerror("Error","Invalid Name & Email")
+                login()                
             else:
                 messageBox.showinfo("Success","welcome")
+                insert_main()
+                product_window()
             cursor.close()
         except Exception as es:
             messageBox.showerror("Error",f"Error due to:{str(es)}") 
+
+
+
 
 #exit application for user
 def exit_user():
@@ -163,7 +181,7 @@ def register():
     button_reg=Button(frame2,text="Enter",
     bg="#25ccc6",font="Tomorrow 28 ",
     bd=8,relief=RAISED,
-    command=lambda:[insert_reg(),delete_login(),login()],
+    command=lambda:[insert_reg()],
     cursor="hand2",
     foreground = "red")
 
@@ -218,7 +236,7 @@ def login():
     button_login=Button(frame2,text="Enter",
         bg="#25ccc6",font="Tomorrow 28 ",
         bd=8,relief=RAISED,
-        command=lambda:[fetch_login(),insert_main(),product_window()],
+        command=lambda:[fetch_login()],
         cursor="hand2",
         foreground = "red")
 
