@@ -8,7 +8,7 @@ import webbrowser
 import mysql.connector as mysql
 
 con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="*************",passwd="***************",
             database="bttotienkk1dqejaut6j")
 cursor=con.cursor()
 sql="select Email,URL from main";
@@ -75,7 +75,7 @@ def Ecommerce():
                 current_price=int(float(current_price))
             print(current_price)
             con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="***************",passwd="***************",
             database="bttotienkk1dqejaut6j")
             cursor=con.cursor()
             sql="select Desirable from main where Email=%s and URL=%s";
@@ -83,7 +83,7 @@ def Ecommerce():
             row1=cursor.fetchone();
             previous_price=row1[0]
             con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="***************",passwd="***************",
             database="bttotienkk1dqejaut6j")
             cursor=con.cursor()
             sql="update main set current=%s where URL=%s";
