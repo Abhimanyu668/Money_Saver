@@ -53,7 +53,7 @@ def insert_product():
     url=ent.get()
     price=ent1.get()
     con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="************",passwd="************",
             database="bttotienkk1dqejaut6j")
     cursor=con.cursor()
     sql="select * from main ORDER BY Serial DESC LIMIT 1"
@@ -64,84 +64,92 @@ def insert_product():
     cursor.execute("commit");
     if(url=="" or price==""):
         messageBox.showinfo("Insert status","All fields are required:")
+        delete_pro()
+        product_page()
     else:
         con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="************",passwd="************",
             database="bttotienkk1dqejaut6j")
         cursor=con.cursor()
         sql="update main set URL=%s,Desirable=%s where Serial=%s"
         cursor.execute(sql,(url,price,id))
         cursor.execute("commit");
         messageBox.showinfo("your app status", "Inserted successfully\n your monotering to the application is successful:")
+        login_page()
+        delete_pro()
         con.close();
     
 #after login to application Entery for product url
 #and price
+def product_page():
+    global lbl,lbl1,ent,ent1,btn1
+    lbl=Label(window,
+            text="URL:"
+            ,bd=0,bg="BLUE",
+            fg="white",font="Times 15 bold italic")
+    lbl.place(
+            x = 120, y = 135,
+            width = 100,
+            height = 45)
 
-lbl=Label(window,
-        text="URL:"
-        ,bd=0,bg="BLUE",
-        fg="white",font="Times 15 bold italic")
-lbl.place(
-        x = 120, y = 135,
-        width = 100,
-        height = 45)
+    ent=Entry(window,bg="yellow",
+            fg="black",bd=8, 
+            font="Times 22", 
+            width=40,
+            relief = "groove")
+    ent.place(
+            x = 240, y = 135,
+            width = 530.0,
+            height = 45)
 
-ent=Entry(window,bg="yellow",
-        fg="black",bd=8, 
-        font="Times 22", 
-        width=40,
-        relief = "groove")
-ent.place(
-        x = 240, y = 135,
-        width = 530.0,
-        height = 45)
-
-lbl1=Label(window,
-        text="Enter ur\n Desirable \nPrice:"
-        ,bd=0,bg="BLUE",
-        fg="white",font="Times 9 bold italic")
-lbl1.place(
-        x = 120, y = 207,
-        width = 100,
-        height = 45)
+    lbl1=Label(window,
+            text="Enter ur\n Desirable \nPrice:"
+            ,bd=0,bg="BLUE",
+            fg="white",font="Times 9 bold italic")
+    lbl1.place(
+            x = 120, y = 207,
+            width = 100,
+            height = 45)
 
 
 
-ent1=Entry(window,bg="yellow",
-        fg="black",bd=8, 
-        font="Times 22", 
-        width=40,
-        relief = "groove")
-ent1.place(
-        x = 240, y = 207,
-        width = 150.0,
-        height = 45)
+    ent1=Entry(window,bg="yellow",
+            fg="black",bd=8, 
+            font="Times 22", 
+            width=40,
+            relief = "groove")
+    ent1.place(
+            x = 240, y = 207,
+            width = 150.0,
+            height = 45)
 
-btn1=Button(window,text="Start\nMonitring",
-        bg="red",font="Tomorrow 15 ",
-        bd=8,relief=RAISED,
-        command=lambda:[insert_product(),login_page()],
-        foreground = "white",
-        cursor="hand2")
+    btn1=Button(window,text="Start\nMonitring",
+            bg="red",font="Tomorrow 15 ",
+            bd=8,relief=RAISED,
+            command=lambda:[insert_product()],
+            foreground = "white",
+            cursor="hand2")
 
-btn1.place(
-        x = 300, y = 320,
-        width = 153,
-        height = 60)
+    btn1.place(
+            x = 300, y = 320,
+            width = 153,
+            height = 60)
 
 
 
 #===function for fetching login page after entering the start monotering button===
-def login_page():
-    global ent_name1, ent_email1,ent_password1
-    lbl.destroy()
-    lbl1.destroy()
-    ent.destroy()
-    ent1.destroy()
-    
-    btn1.destroy()
+def delete_pro():
+        lbl.destroy()
+        lbl1.destroy()
+        ent.destroy()
+        ent1.destroy()
+        
+        btn1.destroy()
+
+
 #==========================Login Frame===================
+def login_page():
+    global frame2,ent_name1, ent_email1,ent_password1,email1,password1,button_login,title1
     frame2=Frame(window,bg="#42195c",relief=RAISED)
     frame2.place(x=40,y=214,
         width=380,
@@ -180,7 +188,7 @@ def login_page():
     button_login=Button(frame2,text="Enter",
         bg="#25ccc6",font="Tomorrow 28 ",
         bd=8,relief=RAISED,
-        command=lambda:[fetch_login(),insert_main(),product_window()],
+        command=lambda:[fetch_login()],
         cursor="hand2",
         foreground = "red")
 
@@ -197,7 +205,7 @@ def insert_main():
     password=ent_password1.get()
     #print(Email1)
     con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="************",passwd="************",
             database="bttotienkk1dqejaut6j")
     cursor=con.cursor()
     #sql="select password from registration where Email=%s";
@@ -219,22 +227,46 @@ def product_window():
 #function for match data from database
 def fetch_login():
     if ent_email1.get()=="" or ent_password1.get=="":
-        messageBox.showerror("Error","All fields are required") 
+        messageBox.showerror("Error","All fields are required")
+        email1.destroy()
+        ent_email1.destroy()
+        password1.destroy()
+        ent_password1.destroy()
+        button_login.destroy()
+        login_page() 
     else:
         try:
             con=mysql.connect(host="bttotienkk1dqejaut6j-mysql.services.clever-cloud.com",
-            user="uamgwvzwbpd8b6kz",passwd="xCYLrsYFurFUe1T7PCrK",
+            user="************",passwd="************",
             database="bttotienkk1dqejaut6j")
             cursor=con.cursor()
             cursor.execute("select * from registration where email=%s and password=%s",(ent_email1.get(),ent_password1.get()))
             row=cursor.fetchone()
             if row==None:
                 messageBox.showerror("Error","Invalid Email Or password")
+                email1.destroy()
+                ent_email1.destroy()
+                password1.destroy()
+                ent_password1.destroy()
+                button_login.destroy()
+                login_page()
             else:
                 messageBox.showinfo("Success","welcome")
+                insert_main()
+                email1.destroy()
+                ent_email1.destroy()
+                password1.destroy()
+                ent_password1.destroy()
+                button_login.destroy()
+                title1.destroy()
+                product_page()
             cursor.close()
+            
+
         except Exception as es:
             messageBox.showerror("Error",f"Error due to:{str(es)}") 
+
+    
 
 
 
@@ -278,5 +310,5 @@ btn2.place(
   #  width = 153,
    # height = 40)
 
-
+product_page()
 window.mainloop()
